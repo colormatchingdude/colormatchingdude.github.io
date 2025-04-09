@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: '#000000', hex: '#000000' }
     ];
 
-    // State Variable
+    // State Variables
     let colorAmounts = new Array(baseColors.length).fill(0);
+    let targetColorRatios = []; // Store the original ratios used to create the target
 
     // DOM Elements
     const baseColorPaletteContainer = document.getElementById('base-color-palette');
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const matchPercentageDisplay = document.getElementById('match-percentage');
     const resetButton = document.getElementById('reset-button');
     const nextButton = document.getElementById('next-button');
+    const solutionButton = document.getElementById('solution-button');
 
     let targetColor = { r: 0, g: 0, b: 0 };
     let uiElements = [];
@@ -145,6 +147,38 @@ document.addEventListener('DOMContentLoaded', () => {
         updateAmountDisplays();
     }
 
+    // --- Solution Function ---
+    function findSolution() {
+        // We already know the exact ratios that created the target color
+        // Just use those stored ratios directly
+        colorAmounts = [...targetColorRatios];
+        
+        // Update UI
+        updateMixAndDisplays();
+        
+        // Add "Solution" message
+        let solutionElement = document.getElementById('solution-message');
+        if (!solutionElement) {
+            solutionElement = document.createElement('div');
+            solutionElement.id = 'solution-message';
+            solutionElement.textContent = 'Solution Applied';
+            solutionElement.style.color = '#007bff';
+            solutionElement.style.fontWeight = 'bold';
+            solutionElement.style.marginTop = '5px';
+            solutionElement.style.fontSize = '1.1em';
+            
+            // Insert after match info or congrats message
+            const matchInfo = document.querySelector('.match-info');
+            matchInfo.parentNode.insertBefore(solutionElement, matchInfo.nextSibling);
+            
+            // Remove solution message after 3 seconds
+            setTimeout(() => {
+                const elem = document.getElementById('solution-message');
+                if (elem) elem.remove();
+            }, 3000);
+        }
+    }
+
     // --- Initialization and Control Setup ---
     function setupControls() {
         baseColorPaletteContainer.innerHTML = '';
@@ -168,8 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
             percentageDisplay.className = 'percentage-display';
             percentageDisplay.textContent = '';
 
-            // Removed the hex text element
-
             const minusButton = document.createElement('button');
             minusButton.className = 'minus-button';
             minusButton.textContent = '-';
@@ -178,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             itemContainer.appendChild(circleButton);
             itemContainer.appendChild(percentageDisplay);
-            // No longer appending hexText
             itemContainer.appendChild(minusButton);
             baseColorPaletteContainer.appendChild(itemContainer);
 
@@ -213,16 +244,60 @@ document.addEventListener('DOMContentLoaded', () => {
             congratsElement.remove();
         }
         
+        // Remove solution message if it exists
+        const solutionElement = document.getElementById('solution-message');
+        if (solutionElement) {
+            solutionElement.remove();
+        }
+        
         updateMixAndDisplays();
     }
 
     function generateTargetColor() {
-        const r = Math.floor(Math.random() * 256);
-        const g = Math.floor(Math.random() * 256);
-        const b = Math.floor(Math.random() * 256);
+        // Two approaches for target generation:
+        // 1. Random mixing of base colors (gives perfect solutions)
+        // 2. Completely random RGB (more challenging)
+        
+        // Let's use approach 1: random mixing of base colors
+        // This ensures there's always a perfect solution
+
+        resetMix(); // Reset amounts for the new target
+        
+        // Randomly select 2-4 colors to mix
+        const numColorsToUse = Math.floor(Math.random() * 3) + 2; // 2 to 4 colors
+        targetColorRatios = new Array(baseColors.length).fill(0);
+        
+        // Randomly pick which colors to use
+        const colorIndices = [];
+        while (colorIndices.length < numColorsToUse) {
+            const index = Math.floor(Math.random() * baseColors.length);
+            if (!colorIndices.includes(index)) {
+                colorIndices.push(index);
+            }
+        }
+        
+        // Assign random weights to the selected colors (1-5 units each)
+        let totalWeight = 0;
+        for (const index of colorIndices) {
+            const weight = Math.floor(Math.random() * 5) + 1; // 1 to 5 units
+            targetColorRatios[index] = weight;
+            totalWeight += weight;
+        }
+        
+        // Calculate the mixed target color
+        let r = 0, g = 0, b = 0;
+        for (let i = 0; i < targetColorRatios.length; i++) {
+            if (targetColorRatios[i] > 0) {
+                const baseRgb = hexToRgb(baseColors[i].hex);
+                const proportion = targetColorRatios[i] / totalWeight;
+                r += baseRgb.r * proportion;
+                g += baseRgb.g * proportion;
+                b += baseRgb.b * proportion;
+            }
+        }
+        
         targetColor = { r, g, b };
         targetColorDisplay.style.backgroundColor = rgbToHex(r, g, b);
-        resetMix(); // Reset amounts for the new target
     }
 
     // --- Event Listeners for main buttons ---
@@ -230,9 +305,13 @@ document.addEventListener('DOMContentLoaded', () => {
         resetButton.addEventListener('click', resetMix);
     } else { console.error("Reset button not found"); }
 
-     if (nextButton) {
+    if (nextButton) {
         nextButton.addEventListener('click', generateTargetColor);
     } else { console.error("Next button not found"); }
+    
+    if (solutionButton) {
+        solutionButton.addEventListener('click', findSolution);
+    } else { console.error("Solution button not found"); }
 
     // --- Initial Setup ---
     try {
