@@ -1,0 +1,161 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #333;
+    padding-bottom: 50px;
+}
+
+h1 {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: 90%;
+    max-width: 800px;
+}
+
+/* --- Color Display Area (Unchanged) --- */
+.color-display { display: flex; justify-content: space-between; width: 100%; margin-bottom: 30px; gap: 2%; }
+.color-box { width: 49%; aspect-ratio: 1 / 1; border: 1px solid #ccc; border-radius: 6px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+#your-mix { background-color: transparent; }
+#target-color { background-color: #CCCCCC; /* Placeholder */ }
+.color-box-content { text-align: center; color: rgba(0, 0, 0, 0.7); background-color: rgba(255, 255, 255, 0.6); padding: 8px 15px; border-radius: 4px; }
+.color-box-label { font-size: 1.1em; font-weight: bold; margin-bottom: 5px; }
+.match-info { font-size: 1em; }
+
+/* --- Base Color Palette Area --- */
+.base-color-palette {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 25px 15px; /* Increased gap slightly */
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+.base-color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative; /* For positioning elements within */
+    width: 70px; /* Fixed width for alignment */
+}
+
+.base-color-circle {
+    width: 55px; /* Slightly larger circle */
+    height: 55px;
+    border-radius: 50%;
+    border: 1px solid #b0b0b0;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer; /* Make it look clickable */
+    position: relative; /* For positioning amount inside */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Default background, color set by JS */
+    transition: transform 0.1s ease; /* Click feedback */
+}
+.base-color-circle:active {
+    transform: scale(0.95); /* Click feedback */
+}
+
+.amount-display {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 3px;
+    padding: 1px 5px;
+    min-width: 20px;
+    text-align: center;
+    z-index: 1;
+    pointer-events: none; /* Add this line */
+    user-select: none;    /* Add this for good measure */
+    -webkit-user-select: none;
+}
+
+.percentage-display {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: -3px; /* Position closer to circle */
+    height: 1.2em; /* Reserve space even when 0% */
+}
+
+/* Removed .base-color-hex style */
+
+.minus-button {
+    width: 28px; /* Width and height must be equal for perfect circles */
+    height: 28px;
+    border-radius: 50%; /* Makes the button circular */
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    color: #555;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1; /* Fix to ensure vertical alignment of minus sign */
+    text-align: center;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.1s ease, transform 0.1s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    display: flex; /* Added to center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 0; /* Remove padding to avoid distorting the shape */
+}
+.minus-button:hover {
+    background-color: #e0e0e0;
+}
+.minus-button:active {
+    background-color: #d0d0d0;
+    transform: scale(0.95);
+}
+.minus-button[disabled] { /* Style for when amount is 0 */
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+
+/* --- Controls Area --- */
+.controls {
+    width: 100%;
+    margin-top: 10px; /* Adjusted margin */
+    border-top: 1px solid #eee;
+    padding-top: 25px;
+}
+
+/* Buttons styling (mostly unchanged) */
+.buttons { display: flex; justify-content: space-around; width: 60%; margin: 0 auto; }
+button { padding: 12px 25px; font-size: 1em; cursor: pointer; border: none; border-radius: 5px; background-color: #007bff; color: white; transition: background-color 0.2s ease; }
+button:hover { background-color: #0056b3; }
+#reset-button { background-color: #dc3545; }
+#reset-button:hover { background-color: #c82333; }
+
+/* --- Responsiveness --- */
+@media (max-width: 650px) {
+    .game-container { width: 95%; padding: 15px; }
+    .color-display { flex-direction: column; align-items: center; gap: 15px; margin-bottom: 25px; }
+    .color-box { width: 80%; }
+    .base-color-palette { gap: 15px 10px; margin-bottom: 25px; }
+    .base-color-item { width: 60px; } /* Adjust width */
+    .base-color-circle { width: 45px; height: 45px; }
+    .amount-display { font-size: 1em; }
+    .minus-button { width: 24px; height: 24px; font-size: 1em;}
+    .buttons { width: 80%; }
+}

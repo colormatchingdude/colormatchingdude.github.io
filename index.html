@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Mixer Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Color Mixer Game</h1>
+
+    <div class="game-container">
+        <div class="color-display">
+            <div id="your-mix" class="color-box">
+                <div class="color-box-content">
+                    <div class="color-box-label">Your Mix</div>
+                    <div class="match-info">Match: <span id="match-percentage">0</span>%</div>
+                </div>
+            </div>
+            <div id="target-color" class="color-box">
+                 <div class="color-box-content">
+                     <div class="color-box-label">Target</div>
+                 </div>
+            </div>
+        </div>
+
+        <div id="base-color-palette" class="base-color-palette">
+            </div>
+
+        <div class="controls">
+            <div class="buttons">
+                <button id="reset-button">Reset</button>
+                <button id="next-button">Next Target</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
