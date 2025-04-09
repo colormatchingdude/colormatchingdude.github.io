@@ -77,8 +77,8 @@ h1 {
 .amount-display {
     font-size: 1.1em;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.7);
-    background-color: rgba(255, 255, 255, 0.6);
+    color: rgba(131, 131, 131, 0.7);
+    /* background-color: rgba(255, 255, 255, 0.6); */
     border-radius: 3px;
     padding: 1px 5px;
     min-width: 20px;
@@ -141,11 +141,13 @@ h1 {
 }
 
 /* Buttons styling (mostly unchanged) */
-.buttons { display: flex; justify-content: space-around; width: 60%; margin: 0 auto; }
+.buttons { display: flex; justify-content: space-around; width: 80%; margin: 0 auto; }
 button { padding: 12px 25px; font-size: 1em; cursor: pointer; border: none; border-radius: 5px; background-color: #007bff; color: white; transition: background-color 0.2s ease; }
 button:hover { background-color: #0056b3; }
 #reset-button { background-color: #dc3545; }
 #reset-button:hover { background-color: #c82333; }
+#solution-button { background-color: #17a2b8; }
+#solution-button:hover { background-color: #138496; }
 
 /* --- Responsiveness --- */
 @media (max-width: 650px) {
@@ -157,5 +159,6 @@ button:hover { background-color: #0056b3; }
     .base-color-circle { width: 45px; height: 45px; }
     .amount-display { font-size: 1em; }
     .minus-button { width: 24px; height: 24px; font-size: 1em;}
-    .buttons { width: 80%; }
+    .buttons { width: 100%; flex-direction: column; gap: 10px; align-items: center; }
+    button { width: 80%; }
 }
