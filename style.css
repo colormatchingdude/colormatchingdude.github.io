@@ -17,7 +17,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
+    background-color: #393737;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -77,10 +77,10 @@ h1 {
 }
 
 .base-color-circle {
-    width: 55px; /* Slightly larger circle */
-    height: 55px;
+    width: 65px; /* Slightly larger circle */
+    height: 65px;
     border-radius: 50%;
-    border: 1px solid #b0b0b0;
+    /* border: 1px solid #b0b0b0; */
     margin-bottom: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     cursor: pointer; /* Make it look clickable */
@@ -193,8 +193,23 @@ button:hover { background-color: #0056b3; }
     transform: scale(1.05);
 }
 
+@media (max-width: 600px) {
+    .buttons {
+        flex-direction: column;
+    }
+    .buttons button {
+        width: 100%;
+        margin-bottom: 10px; /* Adds vertical space */
+    }
 
-/* --- Responsiveness --- */
+    .bmc-img {
+        width: 100%;
+    }
+  }
+  
+
+
+/* --- Responsiveness --- */ 
 /* @media (max-width: 650px) {
     .game-container { width: 95%; padding: 15px; }
     .color-display { flex-direction: column; align-items: center; gap: 15px; margin-bottom: 25px; }
