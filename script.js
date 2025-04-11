@@ -194,12 +194,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const circleButton = document.createElement('button');
             circleButton.className = 'base-color-circle';
+            // Set the background color FIRST
             circleButton.style.backgroundColor = color.hex;
             circleButton.setAttribute('aria-label', `Add ${color.name}`);
+
+            // --- START: Added logic for text color ---
+            let textColor = '#000000'; // Default to black
+            try {
+                const rgb = hexToRgb(color.hex);
+                // Calculate relative luminance (formula from WCAG)
+                // Normalize RGB values to 0-1
+                const r = rgb.r / 255.0;
+                const g = rgb.g / 255.0;
+                const b = rgb.b / 255.0;
+                // Apply gamma correction approximation
+                const r_lin = r <= 0.03928 ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4);
+                const g_lin = g <= 0.03928 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4);
+                const b_lin = b <= 0.03928 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
+                // Calculate luminance
+                const luminance = 0.2126 * r_lin + 0.7152 * g_lin + 0.0722 * b_lin;
+
+                // Use white text for dark backgrounds (luminance < 0.5 is a common threshold)
+                if (luminance < 0.5) {
+                    textColor = '#FFFFFF';
+                }
+            } catch (e) {
+                console.error("Could not calculate luminance for color:", color.hex, e);
+                // Keep default black text on error
+            }
+            // --- END: Added logic for text color ---
 
             const amountDisplay = document.createElement('span');
             amountDisplay.className = 'amount-display';
             amountDisplay.textContent = '0';
+            // Apply the calculated text color
+            amountDisplay.style.color = textColor; // <--- SET TEXT COLOR HERE
             circleButton.appendChild(amountDisplay);
 
             const percentageDisplay = document.createElement('div');
