@@ -170,6 +170,30 @@ button:hover { background-color: #0056b3; }
 #solution-button { background-color: #17a2b8; }
 #solution-button:hover { background-color: #138496; }
 
+/* Match other buttons */
+.bmc-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    height: 45px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.bmc-img {
+    height: 100%;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.bmc-button:hover .bmc-img {
+    transform: scale(1.05);
+}
+
+
 /* --- Responsiveness --- */
 /* @media (max-width: 650px) {
     .game-container { width: 95%; padding: 15px; }
