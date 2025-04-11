@@ -171,7 +171,7 @@ button:hover { background-color: #0056b3; }
 #solution-button:hover { background-color: #138496; }
 
 /* --- Responsiveness --- */
-@media (max-width: 650px) {
+/* @media (max-width: 650px) {
     .game-container { width: 95%; padding: 15px; }
     .color-display { flex-direction: column; align-items: center; gap: 15px; margin-bottom: 25px; }
     .color-box { width: 80%; }
@@ -182,4 +182,4 @@ button:hover { background-color: #0056b3; }
     .minus-button { width: 24px; height: 24px; font-size: 1em;}
     .buttons { width: 100%; flex-direction: column; gap: 10px; align-items: center; }
     button { width: 80%; }
-}
+} */
