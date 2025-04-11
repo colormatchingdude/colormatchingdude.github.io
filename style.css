@@ -177,9 +177,9 @@ button:hover { background-color: #0056b3; }
     .color-box { width: 80%; }
     .base-color-palette { gap: 15px 10px; margin-bottom: 25px; }
     .base-color-item { width: 60px; } /* Adjust width */
-    .base-color-circle { width: 45px; height: 45px; }
+    /* .base-color-circle { width: 45px; height: 45px; }
     .amount-display { font-size: 1em; }
     .minus-button { width: 24px; height: 24px; font-size: 1em;}
     .buttons { width: 100%; flex-direction: column; gap: 10px; align-items: center; }
-    button { width: 80%; }
-} */
+    button { width: 80%; } */
+/* } */ */
