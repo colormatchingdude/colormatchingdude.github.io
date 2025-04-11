@@ -28,7 +28,28 @@ h1 {
 /* --- Color Display Area (Unchanged) --- */
 .color-display { display: flex; justify-content: space-between; width: 100%; margin-bottom: 30px; gap: 2%; }
 .color-box { width: 49%; aspect-ratio: 1 / 1; border: 1px solid #ccc; border-radius: 6px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-#your-mix { background-color: transparent; }
+#your-mix {
+    background-color: transparent; /* Keep this line */
+
+    /* --- Add these lines for the grid pattern --- */
+    background-image:
+        linear-gradient(rgba(204, 204, 204, 0.4) 1px, transparent 1px), /* Fainter horizontal lines */
+        linear-gradient(90deg, rgba(204, 204, 204, 0.4) 1px, transparent 1px); /* Fainter vertical lines */
+    background-size: 20px 20px; /* Size of the grid squares */
+    /* --- End of added lines --- */
+
+    /* --- Existing styles for #your-mix --- */
+    width: 49%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* ... potentially other existing styles ... */
+}
 #target-color { background-color: #CCCCCC; /* Placeholder */ }
 .color-box-content { text-align: center; color: rgba(0, 0, 0, 0.7); background-color: rgba(255, 255, 255, 0.6); padding: 8px 15px; border-radius: 4px; }
 .color-box-label { font-size: 1.1em; font-weight: bold; margin-bottom: 5px; }

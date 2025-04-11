@@ -60,10 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let mixedR = 0, mixedG = 0, mixedB = 0;
 
         if (totalAmount === 0) {
-            // No colors added - should be transparent
+            // No colors added - should be transparent WITH the grid
             yourMixDisplay.style.backgroundColor = 'transparent';
-            return { r: 0, g: 0, b: 0 }; // Return black RGB for calculation purposes
+            yourMixDisplay.style.backgroundImage = ''; // <--- ADD THIS LINE: Reset to allow CSS background-image to show
+            // Return black RGB for calculation purposes
+            return { r: 0, g: 0, b: 0 };
         } else {
+            // Calculate mixed color
             colorAmounts.forEach((amount, index) => {
                 if (amount > 0) {
                     const baseRgb = hexToRgb(baseColors[index].hex);
@@ -73,11 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     mixedB += baseRgb.b * proportion;
                 }
             });
-        }
 
-        const finalHex = rgbToHex(mixedR, mixedG, mixedB);
-        yourMixDisplay.style.backgroundColor = finalHex;
-        return { r: mixedR, g: mixedG, b: mixedB };
+            const finalHex = rgbToHex(mixedR, mixedG, mixedB);
+            yourMixDisplay.style.backgroundColor = finalHex;
+            yourMixDisplay.style.backgroundImage = 'none'; // <--- ADD THIS LINE: Explicitly hide the CSS background-image
+            return { r: mixedR, g: mixedG, b: mixedB };
+        }
     }
 
     function calculateMatch(mixedRgb) {
