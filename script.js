@@ -135,12 +135,30 @@ document.addEventListener('DOMContentLoaded', () => {
         colorAmounts.forEach(amount => { totalAmount += amount; });
 
         uiElements.forEach((elements, index) => {
-            const amount = colorAmounts[index];
+            // Ensure elements and their properties exist before accessing them
             if (elements && elements.amountDisplay && elements.percentageDisplay && elements.minusButton) {
-                elements.amountDisplay.textContent = amount;
-                const percentage = totalAmount === 0 ? 0 : (amount / totalAmount) * 100;
-                elements.percentageDisplay.textContent = totalAmount === 0 ? '' : `${percentage.toFixed(0)}%`;
+                const amount = colorAmounts[index];
+                const percentageDisplay = elements.percentageDisplay; // Cache reference
+
+                elements.amountDisplay.textContent = amount; // Update the amount display (number inside circle)
+
+                // Check if this specific color has been added AND if there's a mix overall
+                if (amount > 0 && totalAmount > 0) {
+                    const percentage = (amount / totalAmount) * 100;
+                    percentageDisplay.textContent = `${percentage.toFixed(0)}%`; // Set percentage text
+                    percentageDisplay.style.color = '#FFFFFF'; // Set text color to white (visible)
+                } else {
+                    const percentage = 0;
+                    percentageDisplay.textContent = `${percentage.toFixed(0)}%`; // Set percentage text
+                    percentageDisplay.style.color = '#999'; // Set text color to dim gray (like CSS default)
+                    // This makes it dim instead of transparent/invisible
+                }
+
+                // Update minus button state
                 elements.minusButton.disabled = (amount <= 0);
+            } else {
+                // Log an error if expected elements are missing for debugging
+                console.error(`UI elements missing for index ${index}`);
             }
         });
     }

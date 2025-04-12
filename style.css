@@ -17,7 +17,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #393737;
+    background-color: #444444;
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -27,21 +27,31 @@ h1 {
 
 /* --- Color Display Area (Unchanged) --- */
 .color-display { display: flex; justify-content: space-between; width: 100%; margin-bottom: 30px; gap: 2%; }
-.color-box { width: 49%; aspect-ratio: 1 / 1; border: 1px solid #ccc; border-radius: 6px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+.color-box { 
+    width: 49%; 
+    aspect-ratio: 1 / 1; 
+    /* border: 1px solid #ccc;  */
+    border-radius: 6px; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; }
 #your-mix {
     background-color: transparent; /* Keep this line */
 
-    /* --- Add these lines for the grid pattern --- */
-    background-image:
-        linear-gradient(rgba(204, 204, 204, 0.4) 1px, transparent 1px), /* Fainter horizontal lines */
-        linear-gradient(90deg, rgba(204, 204, 204, 0.4) 1px, transparent 1px); /* Fainter vertical lines */
-    background-size: 20px 20px; /* Size of the grid squares */
-    /* --- End of added lines --- */
+    /* --- CSS-only subtle white/transparent checkerboard pattern --- */
+    --square-size: 20px; /* <<< ADJUST SIZE HERE */
+    --square-color: rgba(255, 255, 255, 0.1); /* <<< Adjust color/opacity */
 
-    /* --- Existing styles for #your-mix --- */
+    background-image:
+        linear-gradient(45deg, var(--square-color) 25%, transparent 25%, transparent 75%, var(--square-color) 75%),
+        linear-gradient(45deg, var(--square-color) 25%, transparent 25%, transparent 75%, var(--square-color) 75%);
+    background-position: 0 0, var(--square-size) var(--square-size);
+    background-size: calc(var(--square-size) * 2) calc(var(--square-size) * 2);
+    /* --- End of pattern lines --- */
+
+    /* --- Existing styles --- */
     width: 49%;
     aspect-ratio: 1 / 1;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-radius: 6px;
     position: relative;
     display: flex;
@@ -51,7 +61,13 @@ h1 {
     /* ... potentially other existing styles ... */
 }
 #target-color { background-color: #CCCCCC; /* Placeholder */ }
-.color-box-content { text-align: center; color: rgba(0, 0, 0, 0.7); background-color: rgba(255, 255, 255, 0.6); padding: 8px 15px; border-radius: 4px; }
+.color-box-content { 
+    text-align: center; 
+    color: rgba(0, 0, 0, 0.7); 
+    background-color: rgba(255, 255, 255, 0.6); 
+    padding: 8px 15px; 
+    border-radius: 4px; 
+}
 .color-box-label { font-size: 1.1em; font-weight: bold; margin-bottom: 5px; }
 .match-info { font-size: 1em; }
 
@@ -112,7 +128,7 @@ h1 {
 
 .percentage-display {
     font-size: 0.8em;
-    color: #666;
+    color: #ddd;
     margin-top: -3px; /* Position closer to circle */
     height: 1.2em; /* Reserve space even when 0% */
 }
@@ -124,14 +140,10 @@ h1 {
     height: 28px;
     border-radius: 50%; /* Makes the button circular */
     border: 1px solid #ccc;
-    background-color: #f0f0f0;
-    color: #555;
-    font-size: 1.2em;
-    font-weight: bold;
-    line-height: 1; /* Fix to ensure vertical alignment of minus sign */
-    text-align: center;
-    cursor: pointer;
-    margin-top: 8px;
+    background-color: #555; /* Darker background */
+    color: #ddd; /* Lighter symbol */
+    border: 1px solid #666; /* Darker border */
+    margin-top: 5px; /* Optional: Reduce space slightly */
     transition: background-color 0.1s ease, transform 0.1s ease;
     user-select: none;
     -webkit-user-select: none;
@@ -141,10 +153,10 @@ h1 {
     padding: 0; /* Remove padding to avoid distorting the shape */
 }
 .minus-button:hover {
-    background-color: #e0e0e0;
+    background-color: #666;
 }
 .minus-button:active {
-    background-color: #d0d0d0;
+    background-color: #777;
     transform: scale(0.95);
 }
 .minus-button[disabled] { /* Style for when amount is 0 */
