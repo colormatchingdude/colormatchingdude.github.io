@@ -13,15 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const difficultySettings = {
         easy: {
             numColors: { min: 2, max: 3 },
-            weightsRange: { min: 1, max: 3 }
+            weightsRange: { min: 1, max: 3 },
+            visibleBaseColors: 4  // Show only 4 base colors
         },
         medium: {
             numColors: { min: 2, max: 4 },
-            weightsRange: { min: 1, max: 5 }
+            weightsRange: { min: 1, max: 5 },
+            visibleBaseColors: 5  // Show 5 base colors
         },
         hard: {
             numColors: { min: 3, max: 5 },
-            weightsRange: { min: 1, max: 7 }
+            weightsRange: { min: 1, max: 7 },
+            visibleBaseColors: 6  // Show all 6 base colors
         }
     };
 
@@ -87,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (totalAmount === 0) {
             // No colors added - should be transparent WITH the grid
             yourMixDisplay.style.backgroundColor = 'transparent';
-            yourMixDisplay.style.backgroundImage = ''; // <--- ADD THIS LINE: Reset to allow CSS background-image to show
+            yourMixDisplay.style.backgroundImage = ''; // Reset to allow CSS background-image to show
             // Return black RGB for calculation purposes
             return { r: 0, g: 0, b: 0 };
         } else {
@@ -104,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const finalHex = rgbToHex(mixedR, mixedG, mixedB);
             yourMixDisplay.style.backgroundColor = finalHex;
-            yourMixDisplay.style.backgroundImage = 'none'; // <--- ADD THIS LINE: Explicitly hide the CSS background-image
+            yourMixDisplay.style.backgroundImage = 'none'; // Explicitly hide the CSS background-image
             return { r: mixedR, g: mixedG, b: mixedB };
         }
     }
@@ -159,33 +162,32 @@ document.addEventListener('DOMContentLoaded', () => {
         let totalAmount = 0;
         colorAmounts.forEach(amount => { totalAmount += amount; });
 
-        uiElements.forEach((elements, index) => {
-            // Ensure elements and their properties exist before accessing them
+        // Only update UI elements that exist
+        const visibleColorsCount = difficultySettings[currentDifficulty].visibleBaseColors;
+        
+        for (let i = 0; i < visibleColorsCount; i++) {
+            const elements = uiElements[i];
+            
+            // Ensure elements exist before accessing them
             if (elements && elements.amountDisplay && elements.percentageDisplay && elements.minusButton) {
-                const amount = colorAmounts[index];
-                const percentageDisplay = elements.percentageDisplay; // Cache reference
+                const amount = colorAmounts[i];
+                
+                elements.amountDisplay.textContent = amount; // Update the amount display
 
-                elements.amountDisplay.textContent = amount; // Update the amount display (number inside circle)
-
-                // Check if this specific color has been added AND if there's a mix overall
+                // Update percentage display
                 if (amount > 0 && totalAmount > 0) {
                     const percentage = (amount / totalAmount) * 100;
-                    percentageDisplay.textContent = `${percentage.toFixed(0)}%`; // Set percentage text
-                    percentageDisplay.style.color = '#FFFFFF'; // Set text color to white (visible)
+                    elements.percentageDisplay.textContent = `${percentage.toFixed(0)}%`;
+                    elements.percentageDisplay.style.color = '#FFFFFF';
                 } else {
-                    const percentage = 0;
-                    percentageDisplay.textContent = `${percentage.toFixed(0)}%`; // Set percentage text
-                    percentageDisplay.style.color = '#999'; // Set text color to dim gray (like CSS default)
-                    // This makes it dim instead of transparent/invisible
+                    elements.percentageDisplay.textContent = '0%';
+                    elements.percentageDisplay.style.color = '#999';
                 }
 
                 // Update minus button state
                 elements.minusButton.disabled = (amount <= 0);
-            } else {
-                // Log an error if expected elements are missing for debugging
-                console.error(`UI elements missing for index ${index}`);
             }
-        });
+        }
     }
 
     function updateMixAndDisplays() {
@@ -231,22 +233,26 @@ document.addEventListener('DOMContentLoaded', () => {
         baseColorPaletteContainer.innerHTML = '';
         uiElements = [];
 
-        baseColors.forEach((color, index) => {
+        // Get the number of colors to display based on current difficulty
+        const visibleColorsCount = difficultySettings[currentDifficulty].visibleBaseColors;
+        
+        // Only display the first N colors based on difficulty
+        for (let i = 0; i < visibleColorsCount; i++) {
+            const color = baseColors[i];
+            
             const itemContainer = document.createElement('div');
             itemContainer.className = 'base-color-item';
 
             const circleButton = document.createElement('button');
             circleButton.className = 'base-color-circle';
-            // Set the background color FIRST
             circleButton.style.backgroundColor = color.hex;
             circleButton.setAttribute('aria-label', `Add ${color.name}`);
 
-            // --- START: Added logic for text color ---
+            // Calculate text color based on background luminance
             let textColor = '#000000'; // Default to black
             try {
                 const rgb = hexToRgb(color.hex);
                 // Calculate relative luminance (formula from WCAG)
-                // Normalize RGB values to 0-1
                 const r = rgb.r / 255.0;
                 const g = rgb.g / 255.0;
                 const b = rgb.b / 255.0;
@@ -257,21 +263,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Calculate luminance
                 const luminance = 0.2126 * r_lin + 0.7152 * g_lin + 0.0722 * b_lin;
 
-                // Use white text for dark backgrounds (luminance < 0.5 is a common threshold)
+                // Use white text for dark backgrounds
                 if (luminance < 0.5) {
                     textColor = '#FFFFFF';
                 }
             } catch (e) {
                 console.error("Could not calculate luminance for color:", color.hex, e);
-                // Keep default black text on error
             }
-            // --- END: Added logic for text color ---
 
             const amountDisplay = document.createElement('span');
             amountDisplay.className = 'amount-display';
             amountDisplay.textContent = '0';
-            // Apply the calculated text color
-            amountDisplay.style.color = textColor; // <--- SET TEXT COLOR HERE
+            amountDisplay.style.color = textColor;
             circleButton.appendChild(amountDisplay);
 
             const percentageDisplay = document.createElement('div');
@@ -289,26 +292,27 @@ document.addEventListener('DOMContentLoaded', () => {
             itemContainer.appendChild(minusButton);
             baseColorPaletteContainer.appendChild(itemContainer);
 
-            // Store references
-            uiElements.push({
+            // Store UI references at the correct index
+            uiElements[i] = {
                 amountDisplay: amountDisplay,
                 percentageDisplay: percentageDisplay,
                 minusButton: minusButton
-            });
+            };
 
-            // Add Event Listeners
+            // Add Event Listeners (using closure to capture the current index)
+            const colorIndex = i;
             circleButton.addEventListener('click', () => {
-                colorAmounts[index]++;
+                colorAmounts[colorIndex]++;
                 updateMixAndDisplays();
             });
 
             minusButton.addEventListener('click', () => {
-                if (colorAmounts[index] > 0) {
-                    colorAmounts[index]--;
+                if (colorAmounts[colorIndex] > 0) {
+                    colorAmounts[colorIndex]--;
                     updateMixAndDisplays();
                 }
             });
-        });
+        }
     }
 
     function resetMix() {
@@ -342,10 +346,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
         targetColorRatios = new Array(baseColors.length).fill(0);
         
-        // Randomly pick which colors to use
+        // Get the number of visible colors for this difficulty
+        const visibleColorsCount = settings.visibleBaseColors;
+        
+        // Randomly pick which colors to use, but only from the visible colors
         const colorIndices = [];
         while (colorIndices.length < numColorsToUse) {
-            const index = Math.floor(Math.random() * baseColors.length);
+            const index = Math.floor(Math.random() * visibleColorsCount); // Only pick from visible colors
             if (!colorIndices.includes(index)) {
                 colorIndices.push(index);
             }
@@ -384,6 +391,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update the dropdown button text
         const difficultyText = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
         difficultyBtn.innerHTML = `Difficulty: ${difficultyText} <span class="arrow-down">▼</span>`;
+        
+        // Reset color amounts when changing difficulty
+        resetMix();
+        
+        // Rebuild the palette with the correct number of colors
+        setupControls();
         
         // Generate a new target color with the new difficulty
         generateTargetColor();
