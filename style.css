@@ -13,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    max-width: 925px;
+    max-width: 800px;
     margin: 0 auto;
     height: 70px;
 }
@@ -165,46 +165,58 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     width: 90%;
-    max-width: 900px;
+    max-width: 800px;
     margin-top: 20px; /* Add some space after the navbar */
 }
 
-/* --- Color Display Area (Unchanged) --- */
-.color-display { display: flex; justify-content: space-between; width: 100%; margin-bottom: 30px; gap: 2%; }
+/* --- Color Display Area --- */
+.color-display { 
+    display: flex; 
+    justify-content: space-between; 
+    width: 100%; 
+    margin-bottom: 30px; 
+    gap: 2%; 
+}
+
 .color-box { 
     width: 49%; 
     aspect-ratio: 1 / 1; 
-    /* border: 1px solid #ccc;  */
     border-radius: 6px; 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
-    position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+    position: relative; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden; 
+}
+
 #your-mix {
-    background-color: transparent; /* Keep this line */
+    background-color: transparent;
 
     /* --- CSS-only subtle white/transparent checkerboard pattern --- */
-    --square-size: 20px; /* <<< ADJUST SIZE HERE */
-    --square-color: rgba(255, 255, 255, 0.1); /* <<< Adjust color/opacity */
+    --square-size: 20px;
+    --square-color: rgba(255, 255, 255, 0.1);
 
     background-image:
         linear-gradient(45deg, var(--square-color) 25%, transparent 25%, transparent 75%, var(--square-color) 75%),
         linear-gradient(45deg, var(--square-color) 25%, transparent 25%, transparent 75%, var(--square-color) 75%);
     background-position: 0 0, var(--square-size) var(--square-size);
     background-size: calc(var(--square-size) * 2) calc(var(--square-size) * 2);
-    /* --- End of pattern lines --- */
 
-    /* --- Existing styles --- */
     width: 49%;
     aspect-ratio: 1 / 1;
-    /* border: 1px solid #ccc; */
     border-radius: 6px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    /* ... potentially other existing styles ... */
 }
-#target-color { background-color: #CCCCCC; /* Placeholder */ }
+
+#target-color { 
+    background-color: #CCCCCC; 
+}
+
 .color-box-content { 
     text-align: center; 
     color: rgba(0, 0, 0, 0.7); 
@@ -212,8 +224,16 @@ h1 {
     padding: 8px 15px; 
     border-radius: 4px; 
 }
-.color-box-label { font-size: 1.1em; font-weight: bold; margin-bottom: 5px; }
-.match-info { font-size: 1em; }
+
+.color-box-label { 
+    font-size: 1.1em; 
+    font-weight: bold; 
+    margin-bottom: 5px; 
+}
+
+.match-info { 
+    font-size: 1em; 
+}
 
 /* --- Base Color Palette Area --- */
 .base-color-palette {
@@ -221,7 +241,7 @@ h1 {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 25px 15px; /* Increased gap slightly */
+    gap: 25px 15px;
     width: 100%;
     margin-bottom: 30px;
     padding: 10px 0;
@@ -232,99 +252,128 @@ h1 {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    position: relative; /* For positioning elements within */
-    width: 70px; /* Fixed width for alignment */
+    position: relative;
+    width: 70px;
 }
 
 .base-color-circle {
-    width: 65px; /* Slightly larger circle */
+    width: 65px;
     height: 65px;
     border-radius: 50%;
-    /* border: 1px solid #b0b0b0; */
     margin-bottom: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    cursor: pointer; /* Make it look clickable */
-    position: relative; /* For positioning amount inside */
+    cursor: pointer;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white; /* Default background, color set by JS */
-    transition: transform 0.1s ease; /* Click feedback */
+    background-color: white;
+    transition: transform 0.1s ease;
 }
+
 .base-color-circle:active {
-    transform: scale(0.95); /* Click feedback */
+    transform: scale(0.95);
 }
 
 .amount-display {
     font-size: 1.1em;
     font-weight: bold;
     color: rgba(131, 131, 131, 0.7);
-    /* background-color: rgba(255, 255, 255, 0.6); */
     border-radius: 3px;
     padding: 1px 5px;
     min-width: 20px;
     text-align: center;
     z-index: 1;
-    pointer-events: none; /* Add this line */
-    user-select: none;    /* Add this for good measure */
+    pointer-events: none;
+    user-select: none;
     -webkit-user-select: none;
 }
 
 .percentage-display {
     font-size: 0.8em;
     color: #ddd;
-    margin-top: -3px; /* Position closer to circle */
-    height: 1.2em; /* Reserve space even when 0% */
+    margin-top: -3px;
+    height: 1.2em;
 }
 
-/* Removed .base-color-hex style */
-
 .minus-button {
-    width: 28px; /* Width and height must be equal for perfect circles */
+    width: 28px;
     height: 28px;
-    border-radius: 50%; /* Makes the button circular */
+    border-radius: 50%;
     border: 1px solid #ccc;
-    background-color: #555; /* Darker background */
-    color: #ddd; /* Lighter symbol */
-    border: 1px solid #666; /* Darker border */
-    margin-top: 5px; /* Optional: Reduce space slightly */
+    background-color: #555;
+    color: #ddd;
+    border: 1px solid #666;
+    margin-top: 5px;
     transition: background-color 0.1s ease, transform 0.1s ease;
     user-select: none;
     -webkit-user-select: none;
-    display: flex; /* Added to center content */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    padding: 0; /* Remove padding to avoid distorting the shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
 }
+
 .minus-button:hover {
     background-color: #666;
 }
+
 .minus-button:active {
     background-color: #777;
     transform: scale(0.95);
 }
-.minus-button[disabled] { /* Style for when amount is 0 */
+
+.minus-button[disabled] {
     opacity: 0.4;
     cursor: not-allowed;
 }
 
-
 /* --- Controls Area --- */
 .controls {
     width: 100%;
-    margin-top: 10px; /* Adjusted margin */
+    margin-top: 10px;
     border-top: 1px solid #eee;
     padding-top: 25px;
 }
 
-/* Buttons styling (mostly unchanged) */
-.buttons { display: flex; justify-content: space-around; width: 80%; margin: 0 auto; }
-button { padding: 12px 25px; font-size: 1em; cursor: pointer; border: none; border-radius: 5px; background-color: #007bff; color: white; transition: background-color 0.2s ease; }
-button:hover { background-color: #0056b3; }
-#reset-button { background-color: #dc3545; }
-#reset-button:hover { background-color: #c82333; }
-#solution-button { background-color: #17a2b8; }
-#solution-button:hover { background-color: #138496; }
+/* Buttons styling */
+.buttons { 
+    display: flex; 
+    justify-content: space-around; 
+    width: 80%; 
+    margin: 0 auto; 
+}
+
+button { 
+    padding: 12px 25px; 
+    font-size: 1em; 
+    cursor: pointer; 
+    border: none; 
+    border-radius: 5px; 
+    background-color: #007bff; 
+    color: white; 
+    transition: background-color 0.2s ease; 
+}
+
+button:hover { 
+    background-color: #0056b3; 
+}
+
+#reset-button { 
+    background-color: #dc3545; 
+}
+
+#reset-button:hover { 
+    background-color: #c82333; 
+}
+
+#solution-button { 
+    background-color: #17a2b8; 
+}
+
+#solution-button:hover { 
+    background-color: #138496; 
+}
 
 /* Match other buttons */
 .bmc-button {
@@ -349,27 +398,97 @@ button:hover { background-color: #0056b3; }
     transform: scale(1.05);
 }
 
-@media (max-width: 600px) {
-    .buttons {
-        flex-direction: column;
+/* Mobile specific styles */
+@media (max-width: 768px) {
+    /* Make color boxes taller on mobile */
+    .color-box {
+        aspect-ratio: 1 / 1.2; /* Make boxes taller */
     }
-    .buttons button {
-        width: 100%;
-        margin-bottom: 10px; /* Adds vertical space */
+    
+    #your-mix {
+        aspect-ratio: 1 / 1.2; /* Keep same aspect ratio */
+    }
+    
+    /* Make base color circles smaller on mobile */
+    .base-color-item {
+        width: 50px; /* Smaller width for container */
+        margin-bottom: 10px; /* Reduce space between rows */
     }
 
+    .base-color-circle {
+        width: 50px; /* Smaller circle */
+        height: 50px; /* Must match width exactly */
+        min-width: 50px; /* Prevent resizing */
+        min-height: 50px; /* Prevent resizing */
+        max-width: 50px; /* Prevent resizing */
+        max-height: 50px; /* Prevent resizing */
+    }
+
+    /* Smaller minus buttons */
+    .minus-button {
+        width: 24px;
+        height: 24px;
+        min-width: 24px; /* Ensure exact dimensions */
+        min-height: 24px;
+        margin-top: 2px; /* Less space after percentage */
+    }
+    
+    /* Make percentage display more compact */
+    .percentage-display {
+        margin-top: -2px;
+        height: 1em;
+    }
+    
+    /* Reduce gap in palette */
+    .base-color-palette {
+        gap: 15px 10px;
+        margin-bottom: 20px;
+    }
+    
+    /* Tighten padding in game container */
+    .game-container {
+        padding: 15px;
+    }
+    
+    /* Adjust buttons for mobile */
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .buttons button,
+    .bmc-button {
+        width: 100%;
+    }
+    
     .bmc-img {
         width: 100%;
     }
 }
 
-/* Additional media query for smaller screens */
+/* For very small screens */
 @media (max-width: 480px) {
     .navbar-logo h1 {
         font-size: 1.2rem;
     }
     
-    .game-container {
-        padding: 15px;
+    /* Further increase height of color boxes */
+    .color-box, #your-mix {
+        aspect-ratio: 1 / 1.3;
+    }
+    
+    /* Make color circles even smaller */
+    .base-color-item {
+        width: 45px;
+    }
+    
+    .base-color-circle {
+        width: 42px;
+        height: 42px;
+    }
+    
+    /* Smaller font for amount display */
+    .amount-display {
+        font-size: 0.9em;
     }
 }
