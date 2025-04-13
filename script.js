@@ -9,6 +9,25 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: '#000000', hex: '#000000' }
     ];
 
+    // Difficulty settings
+    const difficultySettings = {
+        easy: {
+            numColors: { min: 2, max: 3 },
+            weightsRange: { min: 1, max: 3 }
+        },
+        medium: {
+            numColors: { min: 2, max: 4 },
+            weightsRange: { min: 1, max: 5 }
+        },
+        hard: {
+            numColors: { min: 3, max: 5 },
+            weightsRange: { min: 1, max: 7 }
+        }
+    };
+
+    // Current difficulty level (default to medium)
+    let currentDifficulty = 'medium';
+
     // State Variables
     let colorAmounts = new Array(baseColors.length).fill(0);
     let targetColorRatios = []; // Store the original ratios used to create the target
@@ -21,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.getElementById('reset-button');
     const nextButton = document.getElementById('next-button');
     const solutionButton = document.getElementById('solution-button');
+    
+    // Navbar Elements
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbarMenu = document.querySelector('.navbar-menu');
+    const difficultyLinks = document.querySelectorAll('.dropdown-content a');
+    const difficultyBtn = document.querySelector('.dropdown-btn');
 
     let targetColor = { r: 0, g: 0, b: 0 };
     let uiElements = [];
@@ -305,17 +330,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generateTargetColor() {
-        // Two approaches for target generation:
-        // 1. Random mixing of base colors (gives perfect solutions)
-        // 2. Completely random RGB (more challenging)
+        // Get difficulty settings
+        const settings = difficultySettings[currentDifficulty];
         
-        // Let's use approach 1: random mixing of base colors
-        // This ensures there's always a perfect solution
-
         resetMix(); // Reset amounts for the new target
         
-        // Randomly select 2-4 colors to mix
-        const numColorsToUse = Math.floor(Math.random() * 3) + 2; // 2 to 4 colors
+        // Randomly select number of colors to mix based on difficulty
+        const numColorsToUse = Math.floor(Math.random() * 
+            (settings.numColors.max - settings.numColors.min + 1)) + 
+            settings.numColors.min;
+            
         targetColorRatios = new Array(baseColors.length).fill(0);
         
         // Randomly pick which colors to use
@@ -327,10 +351,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Assign random weights to the selected colors (1-5 units each)
+        // Assign random weights to the selected colors based on difficulty
         let totalWeight = 0;
         for (const index of colorIndices) {
-            const weight = Math.floor(Math.random() * 5) + 1; // 1 to 5 units
+            const weight = Math.floor(Math.random() * 
+                (settings.weightsRange.max - settings.weightsRange.min + 1)) + 
+                settings.weightsRange.min;
             targetColorRatios[index] = weight;
             totalWeight += weight;
         }
@@ -351,6 +377,23 @@ document.addEventListener('DOMContentLoaded', () => {
         targetColorDisplay.style.backgroundColor = rgbToHex(r, g, b);
     }
 
+    // Update difficulty level and button text
+    function setDifficulty(difficulty) {
+        currentDifficulty = difficulty;
+        
+        // Update the dropdown button text
+        const difficultyText = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+        difficultyBtn.innerHTML = `Difficulty: ${difficultyText} <span class="arrow-down">▼</span>`;
+        
+        // Generate a new target color with the new difficulty
+        generateTargetColor();
+        
+        // Close mobile menu if open
+        if (navbarMenu.classList.contains('active')) {
+            navbarMenu.classList.remove('active');
+        }
+    }
+
     // --- Event Listeners for main buttons ---
     if (resetButton) {
         resetButton.addEventListener('click', resetMix);
@@ -364,10 +407,27 @@ document.addEventListener('DOMContentLoaded', () => {
         solutionButton.addEventListener('click', findSolution);
     } else { console.error("Solution button not found"); }
 
+    // --- Navbar Event Listeners ---
+    // Mobile menu toggle
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navbarMenu.classList.toggle('active');
+        });
+    }
+
+    // Difficulty selection
+    difficultyLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const difficulty = e.target.getAttribute('data-difficulty');
+            setDifficulty(difficulty);
+        });
+    });
+
     // --- Initial Setup ---
     try {
         setupControls();
-        generateTargetColor();
+        setDifficulty('medium'); // Start with medium difficulty
         
         // Make sure the yourMixDisplay starts transparent
         yourMixDisplay.style.backgroundColor = 'transparent';
