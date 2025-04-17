@@ -1,3 +1,82 @@
+/* --- Footer Styles --- */
+.footer {
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer p {
+    margin: 0 0 10px 0;
+    font-size: 0.9em;
+}
+
+.footer-nav {
+    margin-top: 10px;
+}
+
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9em;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* --- Privacy Policy Page Styles --- */
+.privacy-container {
+    max-width: 800px;
+    width: 90%;
+    margin: 20px auto 40px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.privacy-content {
+    line-height: 1.6;
+}
+
+.privacy-content h2 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.privacy-content h3 {
+    color: #007bff;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.privacy-content ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.privacy-content a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.privacy-content a:hover {
+    text-decoration: underline;
+}
+
 /* Navbar Styles */
 .navbar {
     background-color: #333;
