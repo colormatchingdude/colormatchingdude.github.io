@@ -1,3 +1,263 @@
+/* --- New Main Container Layout --- */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 90%;
+    margin: 20px auto;
+    gap: 30px;
+}
+
+.game-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #444444;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    min-width: 320px;
+    max-width: 60%;
+}
+
+/* --- App Promo Section --- */
+.app-promo {
+    flex: 1;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+    max-width: 35%;
+}
+
+.promo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.app-promo h2 {
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.app-promo p {
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.app-screenshot {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 25px;
+}
+
+.phone-screenshot {
+    max-width: 220px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.join-testing {
+    width: 100%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.play-store-badge {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.play-store-badge img {
+    max-width: 180px;
+    height: auto;
+}
+
+.join-group {
+    margin-bottom: 20px;
+}
+
+.join-group h3 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.join-group ol {
+    padding-left: 20px;
+    margin-top: 0;
+    color: #555;
+}
+
+.join-group li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.join-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.join-link:hover {
+    text-decoration: underline;
+}
+
+.join-button {
+    display: block;
+    width: 80%;
+    margin: 20px auto 0;
+    padding: 12px 0;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.join-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-container,
+    .app-promo {
+        max-width: 800px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        width: 95%;
+    }
+    
+    /* Further mobile adjustments to maintain original styles */
+    .color-box {
+        aspect-ratio: 1 / 1.2;
+    }
+    
+    #your-mix {
+        aspect-ratio: 1 / 1.2;
+    }
+    
+    .base-color-item {
+        width: 50px;
+        margin-bottom: 10px;
+    }
+
+    .base-color-circle {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        min-height: 50px;
+        max-width: 50px;
+        max-height: 50px;
+    }
+
+    .minus-button {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+        margin-top: 2px;
+    }
+    
+    .percentage-display {
+        margin-top: -2px;
+        height: 1em;
+    }
+    
+    .base-color-palette {
+        gap: 15px 10px;
+        margin-bottom: 20px;
+    }
+    
+    .game-container,
+    .app-promo {
+        padding: 15px;
+    }
+    
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .buttons button,
+    .bmc-button {
+        width: 100%;
+    }
+    
+    .bmc-img {
+        width: 100%;
+    }
+    
+    .phone-screenshot {
+        max-width: 180px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .navbar-logo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .color-box, #your-mix {
+        aspect-ratio: 1 / 1.3;
+    }
+    
+    .base-color-item {
+        width: 45px;
+    }
+    
+    .base-color-circle {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .amount-display {
+        font-size: 0.9em;
+    }
+    
+    .play-store-badge img {
+        max-width: 160px;
+    }
+    
+    .phone-screenshot {
+        max-width: 150px;
+    }
+}
+
 /* --- Footer Styles --- */
 .footer {
     width: 100%;
@@ -92,7 +352,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    max-width: 800px;
+    max-width: 1200px; /* Increased to match new main-container */
     margin: 0 auto;
     height: 70px;
 }
@@ -233,19 +493,6 @@ body {
 h1 {
     color: #555;
     margin-bottom: 20px;
-}
-
-.game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #444444;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    width: 90%;
-    max-width: 800px;
-    margin-top: 20px; /* Add some space after the navbar */
 }
 
 /* --- Color Display Area --- */
@@ -477,97 +724,75 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Mobile specific styles */
+/* How to Play Section */
+.how-to-play {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.how-to-play h2 {
+    text-align: center;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.instructions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.instruction-step {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.step-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.instruction-step p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.instruction-step strong {
+    color: #007bff;
+}
+
+/* Media query adjustments */
 @media (max-width: 768px) {
-    /* Make color boxes taller on mobile */
-    .color-box {
-        aspect-ratio: 1 / 1.2; /* Make boxes taller */
-    }
-    
-    #your-mix {
-        aspect-ratio: 1 / 1.2; /* Keep same aspect ratio */
-    }
-    
-    /* Make base color circles smaller on mobile */
-    .base-color-item {
-        width: 50px; /* Smaller width for container */
-        margin-bottom: 10px; /* Reduce space between rows */
-    }
-
-    .base-color-circle {
-        width: 50px; /* Smaller circle */
-        height: 50px; /* Must match width exactly */
-        min-width: 50px; /* Prevent resizing */
-        min-height: 50px; /* Prevent resizing */
-        max-width: 50px; /* Prevent resizing */
-        max-height: 50px; /* Prevent resizing */
-    }
-
-    /* Smaller minus buttons */
-    .minus-button {
-        width: 24px;
-        height: 24px;
-        min-width: 24px; /* Ensure exact dimensions */
-        min-height: 24px;
-        margin-top: 2px; /* Less space after percentage */
-    }
-    
-    /* Make percentage display more compact */
-    .percentage-display {
-        margin-top: -2px;
-        height: 1em;
-    }
-    
-    /* Reduce gap in palette */
-    .base-color-palette {
-        gap: 15px 10px;
-        margin-bottom: 20px;
-    }
-    
-    /* Tighten padding in game container */
-    .game-container {
+    .how-to-play {
         padding: 15px;
     }
     
-    /* Adjust buttons for mobile */
-    .buttons {
-        flex-direction: column;
+    .instruction-step {
         gap: 10px;
     }
     
-    .buttons button,
-    .bmc-button {
-        width: 100%;
+    .step-number {
+        width: 25px;
+        height: 25px;
+        font-size: 0.9em;
     }
     
-    .bmc-img {
-        width: 100%;
-    }
-}
-
-/* For very small screens */
-@media (max-width: 480px) {
-    .navbar-logo h1 {
-        font-size: 1.2rem;
-    }
-    
-    /* Further increase height of color boxes */
-    .color-box, #your-mix {
-        aspect-ratio: 1 / 1.3;
-    }
-    
-    /* Make color circles even smaller */
-    .base-color-item {
-        width: 45px;
-    }
-    
-    .base-color-circle {
-        width: 42px;
-        height: 42px;
-    }
-    
-    /* Smaller font for amount display */
-    .amount-display {
+    .instruction-step p {
         font-size: 0.9em;
     }
 }

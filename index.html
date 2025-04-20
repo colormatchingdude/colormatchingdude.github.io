@@ -47,37 +47,95 @@
         </div>
     </nav>
 
-    <div class="game-container">
-        <div class="color-display">
-            <div id="your-mix" class="color-box">
-                <div class="color-box-content">
-                    <div class="color-box-label">Your Mix</div>
-                    <div class="match-info">Match: <span id="match-percentage">0</span>%</div>
+    <div class="main-container">
+        <div class="game-container">
+            <div class="color-display">
+                <div id="your-mix" class="color-box">
+                    <div class="color-box-content">
+                        <div class="color-box-label">Your Mix</div>
+                        <div class="match-info">Match: <span id="match-percentage">0</span>%</div>
+                    </div>
+                </div>
+                <div id="target-color" class="color-box">
+                     <div class="color-box-content">
+                         <div class="color-box-label">Target</div>
+                     </div>
                 </div>
             </div>
-            <div id="target-color" class="color-box">
-                 <div class="color-box-content">
-                     <div class="color-box-label">Target</div>
-                 </div>
+
+            <div id="base-color-palette" class="base-color-palette">
+                </div>
+
+            <div class="controls">
+                <div class="buttons">
+                    <button id="reset-button">Reset</button>
+                    <button id="solution-button">Solution</button>
+                    <button id="next-button">Next</button>
+                    <!-- Buy Me a Coffee Button -->
+                    <a href="https://buymeacoffee.com/colormatchingdude" target="_blank" class="bmc-button">
+                        <img
+                        src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                        alt="Buy Me A Coffee"
+                        class="bmc-img"
+                        />
+                    </a>
+                </div>
+            </div>
+
+            <div class="how-to-play">
+                <h2>How to Play</h2>
+                <div class="instructions">
+                    <div class="instruction-step">
+                        <div class="step-number">1</div>
+                        <p>Observe the <strong>Target</strong> color on the right that you need to recreate.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">2</div>
+                        <p>Click on the colored circles below to add amounts of each base color to your mix.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">3</div>
+                        <p>Use the minus buttons to remove colors if you add too much of any color.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">4</div>
+                        <p>Try to get your match percentage as close to 100% as possible!</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">5</div>
+                        <p>Click <strong>Reset</strong> to start over, <strong>Solution</strong> to see the answer, or <strong>Next</strong> for a new challenge.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div id="base-color-palette" class="base-color-palette">
-            </div>
-
-        <div class="controls">
-            <div class="buttons">
-                <button id="reset-button">Reset</button>
-                <button id="solution-button">Solution</button>
-                <button id="next-button">Next</button>
-                <!-- Buy Me a Coffee Button -->
-                <a href="https://buymeacoffee.com/colormatchingdude" target="_blank" class="bmc-button">
-                    <img
-                    src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
-                    alt="Buy Me A Coffee"
-                    class="bmc-img"
-                    />
-                </a>
+        <div class="app-promo">
+            <div class="promo-content">
+                <h2>Try ColorMix on Android!</h2>
+                <p>The ColorMix app is now available for beta testing on Google Play. Join our testers group to get early access!</p>
+                
+                <div class="app-screenshot">
+                    <img src="app.png" alt="ColorMix App Screenshot" class="phone-screenshot">
+                </div>
+                
+                <div class="join-testing">
+                    <div class="play-store-badge">
+                        <a href="https://groups.google.com/g/colormix-testers">
+                            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
+                        </a>
+                    </div>
+                    
+                    <div class="join-group">
+                        <h3>How to join:</h3>
+                        <ol>
+                            <li>Join our Google Group: <a href="https://groups.google.com/g/colormix-testers" class="join-link">ColorMix Testers</a></li>
+                            <li>You'll receive an invitation to test the app</li>
+                            <li>Download from Google Play and start mixing colors on the go!</li>
+                        </ol>
+                    </div>
+                    
+                    <a href="https://groups.google.com/g/colormix-testers" class="join-button">Join Beta Testing</a>
+                </div>
             </div>
         </div>
     </div>
