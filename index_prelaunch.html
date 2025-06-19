@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Mixer Game</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD9SEZEH73"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-BD9SEZEH73');
+    </script>
+
+    <meta name="p:domain_verify" content="47c2e420e013c7bd8b94c174de35e7e3"/>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4147807068955046"
+     crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <h1>ColorMix</h1>
+            </div>
+            <div class="navbar-menu">
+                <div class="dropdown">
+                    <button class="dropdown-btn">Difficulty <span class="arrow-down">▼</span></button>
+                    <div class="dropdown-content">
+                        <a href="#" data-difficulty="easy">Easy</a>
+                        <a href="#" data-difficulty="medium">Medium</a>
+                        <a href="#" data-difficulty="hard">Hard</a>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="game-container">
+            <div class="color-display">
+                <div id="your-mix" class="color-box">
+                    <div class="color-box-content">
+                        <div class="color-box-label">Your Mix</div>
+                        <div class="match-info">Match: <span id="match-percentage">0</span>%</div>
+                    </div>
+                </div>
+                <div id="target-color" class="color-box">
+                     <div class="color-box-content">
+                         <div class="color-box-label">Target</div>
+                     </div>
+                </div>
+            </div>
+
+            <div id="base-color-palette" class="base-color-palette">
+                </div>
+
+            <div class="controls">
+                <div class="buttons">
+                    <button id="reset-button">Reset</button>
+                    <button id="solution-button">Solution</button>
+                    <button id="next-button">Next</button>
+                    <!-- Buy Me a Coffee Button -->
+                    <a href="https://buymeacoffee.com/colormatchingdude" target="_blank" class="bmc-button">
+                        <img
+                        src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                        alt="Buy Me A Coffee"
+                        class="bmc-img"
+                        />
+                    </a>
+                </div>
+            </div>
+
+            <div class="how-to-play">
+                <h2>How to Play</h2>
+                <div class="instructions">
+                    <div class="instruction-step">
+                        <div class="step-number">1</div>
+                        <p>Observe the <strong>Target</strong> color on the right that you need to recreate.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">2</div>
+                        <p>Click on the colored circles below to add amounts of each base color to your mix.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">3</div>
+                        <p>Use the minus buttons to remove colors if you add too much of any color.</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">4</div>
+                        <p>Try to get your match percentage as close to 100% as possible!</p>
+                    </div>
+                    <div class="instruction-step">
+                        <div class="step-number">5</div>
+                        <p>Click <strong>Reset</strong> to start over, <strong>Solution</strong> to see the answer, or <strong>Next</strong> for a new challenge.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="app-promo">
+            <div class="promo-content">
+                <h2>Play ColorMix on Android Now!</h2>
+                <p>The ColorMix app is now available in Google Play store.</p>
+                
+                <div class="app-screenshot">
+                    <img src="app.png" alt="ColorMix App Screenshot" class="phone-screenshot">
+                </div>
+                
+                <div class="join-testing">
+                    <div class="play-store-badge">
+                        <a href="https://play.google.com/store/apps/details?id=io.github.colormatchingdude">
+                            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
+                        </a>
+                    </div>
+                    
+                    <a href="https://play.google.com/store/apps/details?id=io.github.colormatchingdude" class="join-button">Install on Android</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 ColorMix. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
